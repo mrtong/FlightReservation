@@ -10,7 +10,7 @@
     <meta http-equiv="Pragma" content="no-cache"/>
     <meta http-equiv="Expires" content="0"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <link rel="shortcut icon" href="/iFlightReservation/mages/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="/FlightReservation/mages/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" type="text/css" href="/FlightReservation/styles/deliciouslyblue/theme.css" title="default" />     
     <link rel="alternate stylesheet" type="text/css" href="/FlightReservation/styles/deliciouslygreen/theme.css" title="green" />
     <script type="text/javascript" src="/FlightReservation/scripts/prototype.js"></script>

@@ -1,7 +1,6 @@
   <table>
     <tr>
-      <td><a href="<c:url value="/welcome.do"/>">Home</a></td>
-      <td align="right"><img src="<c:url value="/images/springsource-logo.png"/>"/></td>
+      <td><a href="<c:url value="/home.html"/>">Home</a></td>
     </tr>
   </table>
 

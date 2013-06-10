@@ -35,6 +35,9 @@ public class AirportDaoImpl extends HibernateDaoSupport implements AirportDao {
 
   @Override
   public Airport getAirport(final String code) {
+//	HibernateCallback allows you to access the current transactionally bound session in order to do perform 
+//	  more complex hibernate functions. Most of the time the simple methods on HibernateTemplate are sufficient, 
+//	  but sometimes you need to go down to the Session.
     return getHibernateTemplate().execute(new HibernateCallback<Airport>() {
 
       @Override

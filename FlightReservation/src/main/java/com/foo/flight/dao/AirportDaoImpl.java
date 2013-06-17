@@ -18,7 +18,6 @@ import com.foo.flight.model.Airport;
 
 @Repository
 public class AirportDaoImpl extends HibernateDaoSupport implements AirportDao {
-  @Autowired
   public AirportDaoImpl(SessionFactory sessionFactory) {
     super.setSessionFactory(sessionFactory);
   }

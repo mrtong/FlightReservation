@@ -22,7 +22,6 @@ import com.foo.flight.model.Flight;
 @Repository
 public class FlightDaoImpl extends HibernateDaoSupport implements FlightDao {
   
-  @Autowired
   public FlightDaoImpl(SessionFactory sessionFactory){
     super.setSessionFactory(sessionFactory);
   }

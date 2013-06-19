@@ -18,7 +18,6 @@ import com.foo.flight.dao.interfaces.FlightDao;
 import com.foo.flight.model.Flight;
 import com.foo.flight.model.FlightSearchCriteria;
 import com.foo.flight.model.Flights;
-import com.foo.flight.service.interfaces.AirlineService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { MockDaoConfig.class,
@@ -38,7 +37,8 @@ public class AirlineServiceTest {
 
     Mockito.when(flightDaoMock.findFlights("LAX", "ORD")).thenReturn(flights);
 
-    AirlineService a = new AirlineServiceImpl(flightDaoMock);
+    AirlineServiceImpl a = new AirlineServiceImpl();
+    a.setFlightDao(flightDaoMock);
     Flights results = a.getFlights(criteria);
     assertTrue(flights == results.getFlights());
     Mockito.verify(flightDaoMock, Mockito.times(1)).findFlights("LAX", "ORD");

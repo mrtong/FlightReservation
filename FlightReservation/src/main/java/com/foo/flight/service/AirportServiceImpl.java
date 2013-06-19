@@ -2,6 +2,7 @@ package com.foo.flight.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,13 +14,19 @@ import com.foo.flight.service.interfaces.AirportService;
 @Service
 @Transactional(readOnly = true)
 public class AirportServiceImpl implements AirportService {
-  private final AirportDao airportDao;
+  @Autowired
+  private AirportDao airportDao;
 
-  public AirportServiceImpl(AirportDao airportDao) {
-    this.airportDao = airportDao;
-  }
+  public AirportDao getAirportDao() {
+	return airportDao;
+}
+
+public void setAirportDao(AirportDao airportDao) {
+	this.airportDao = airportDao;
+}
 
   @Override
+  @Transactional(readOnly = true)
   public List<Airport> getAirports() {
     return airportDao.getAirports();
   }

@@ -3,6 +3,7 @@ package com.foo.flight.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,14 +17,18 @@ import com.foo.flight.service.interfaces.AirlineService;
 @Service
 @Transactional(readOnly = true)
 public class AirlineServiceImpl implements AirlineService {
+	@Autowired
+	private FlightDao flightDao;
 
-  private final FlightDao flightDao;
+	public FlightDao getFlightDao() {
+		return flightDao;
+	}
 
-  public AirlineServiceImpl(FlightDao flightDao) {
-    this.flightDao = flightDao;
-  }
-  
-  @Override
+	public void setFlightDao(FlightDao flightDao) {
+		this.flightDao = flightDao;
+	}
+
+@Override
   public List<Flight> getFlights() {
     return flightDao.getFlights();
   }
@@ -43,7 +48,6 @@ public class AirlineServiceImpl implements AirlineService {
   public Flights getFlights(FlightSearchCriteria criteria) {
     String fromAirportCode = criteria.getFromAirportCode();
     String toAirportCode = criteria.getToAirportCode();
-
     List<Flight> flights = flightDao.findFlights(fromAirportCode, toAirportCode);
 
     Flights results = new Flights();

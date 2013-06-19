@@ -19,6 +19,17 @@
 			<id>Spring milestone</id>
 			<url>http://maven.springframework.org/milestone</url>
 		</repository>
+		<repository>
+        <id>spring-libs-snapshot</id>
+        <name>Spring Snapshot Repository</name>
+        <url>http://repo.springsource.org/snapshot</url>
+        <releases>
+            <enabled>false</enabled>
+        </releases>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </repository>
 	</repositories>
 
 	<dependencies>
@@ -234,6 +245,31 @@
 			<artifactId>junit</artifactId>
 			<version>4.8.2</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${springFramework.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${springFramework.version}</version>
+
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-javaconfig</artifactId>
+			<version>1.0.0.CI-SNAPSHOT</version>
+
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${springFramework.version}</version>
+
 		</dependency>
 	</dependencies>
 

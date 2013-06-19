@@ -41,7 +41,9 @@ public class DefaultDaoConfig implements DaoConfig, TransactionManagementConfigu
   @Bean
   @Override
   public AirportDao getAirportDao() {
-    return new AirportDaoImpl(getSessionFactory());
+	  AirportDaoImpl a=new AirportDaoImpl();
+	  a.setSessionFac(getSessionFactory());
+	  return a;
   }
   
   @Bean

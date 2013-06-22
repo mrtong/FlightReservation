@@ -21,7 +21,7 @@ public abstract class AbstractDaoTest {
 	    airportDao.save(jfk);
 	    
 	    Flight f = new Flight();
-	    f.setFrom(lax);
-	    f.setTo(jfk);
+	    f.setFromAirport(lax);
+	    f.setToAirport(jfk);
 	  }
 	}

@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
+import com.foo.flight.dao.hibernate.DefaultDaoConfig;
 import com.foo.flight.dao.interfaces.FlightDao;
 import com.foo.flight.model.Flight;
 
@@ -27,8 +28,8 @@ public class FlightDaoTest extends AbstractDaoTest {
   @Test
   public void flightDaoLifeCycle() {  
     Flight f = new Flight();
-    f.setFrom(lax);
-    f.setTo(jfk);
+    f.setFromAirport(lax);
+    f.setToAirport(jfk);
 
     DateTime departureTime = new DateTime(new Date()).plusDays(1);
     DateTime arrivalTime = departureTime.plusHours(8);

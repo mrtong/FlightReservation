@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.foo.flight.service.interfaces.ServiceConfig;
+import com.foo.flight.service.JpaServiceConfig;
 
 @Configuration
 public class ControllerConfig {
   // Auto Wire ServiceConfig so we can get the Service objects
   @Autowired
-  private ServiceConfig serviceConfig;
+  private JpaServiceConfig serviceConfig;
   
   @Bean
   public AirportController getAirportController() {

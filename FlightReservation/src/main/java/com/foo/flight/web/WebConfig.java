@@ -22,7 +22,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import com.foo.flight.dao.DefaultDaoConfig;
+import com.foo.flight.dao.jpa.JpaDefaultDaoConfig;
 import com.foo.flight.model.Airport;
 import com.foo.flight.model.Flight;
 import com.foo.flight.model.FlightSearchCriteria;
@@ -30,13 +30,13 @@ import com.foo.flight.model.Flights;
 import com.foo.flight.model.Reservation;
 import com.foo.flight.model.Reservations;
 import com.foo.flight.model.Ticket;
-import com.foo.flight.service.DefaultServiceConfig;
+import com.foo.flight.service.JpaServiceConfig;
 import com.foo.flight.web.controller.ControllerConfig;
 
 
 @EnableWebMvc
 @Configuration
-@Import({ ControllerConfig.class, DefaultServiceConfig.class, DefaultDaoConfig.class })
+@Import({ ControllerConfig.class, JpaServiceConfig.class, JpaDefaultDaoConfig.class })
 public class WebConfig extends WebMvcConfigurerAdapter {
 
   @Override

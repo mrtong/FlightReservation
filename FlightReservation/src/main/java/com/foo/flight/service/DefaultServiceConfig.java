@@ -18,19 +18,19 @@ public class DefaultServiceConfig implements ServiceConfig {
   @Bean
   @Override
   public AirportService getAirportService() {
-    return new AirportServiceImpl(daoConfig.getAirportDao());
+    return new AirportServiceImpl();
   }
   
   @Bean
   @Override
   public AirlineService getAirlineService() {
-    return new AirlineServiceImpl(daoConfig.getFlightDao());
+    return new AirlineServiceImpl();
   }
   
   @Bean
   @Override
   public ReservationService getReservationService() {
-    return new ReservationServiceImpl(daoConfig.getFlightDao(), daoConfig.getTicketDao());
+    return new ReservationServiceImpl(null,null);
   }
 }
 

@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
+import com.foo.flight.dao.hibernate.DefaultDaoConfig;
 import com.foo.flight.model.Airport;
 
 @RunWith(SpringJUnit4ClassRunner.class)

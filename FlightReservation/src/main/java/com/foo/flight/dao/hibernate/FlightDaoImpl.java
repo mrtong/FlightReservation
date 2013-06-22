@@ -1,4 +1,4 @@
-package com.foo.flight.dao;
+package com.foo.flight.dao.hibernate;
 
 import java.sql.SQLException;
 import java.util.List;

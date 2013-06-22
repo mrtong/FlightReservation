@@ -2,31 +2,41 @@ package com.foo.flight.service;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.foo.flight.dao.interfaces.AirportDao;
+import com.foo.flight.dao.jpa.JpaAirportDaoImpl;
 import com.foo.flight.model.Airport;
 import com.foo.flight.service.exceptions.NoSuchAirportException;
 import com.foo.flight.service.interfaces.AirportService;
 
 @Service
-@Transactional(readOnly = true)
+
 public class AirportServiceImpl implements AirportService {
-  private final AirportDao airportDao;
+  @Resource
+  private JpaAirportDaoImpl airportDao;
 
-  public AirportServiceImpl(AirportDao airportDao) {
-    this.airportDao = airportDao;
+
+
+public AirportServiceImpl() {
+    
   }
 
   @Override
+  @Transactional(readOnly = true)
   public List<Airport> getAirports() {
-    return airportDao.getAirports();
+	
+	List<Airport> result=airportDao.findAll();
+	System.out.println("yes I can get here:airportDao="+result.size());
+    return result;
   }
 
   @Override
+  @Transactional(readOnly = true)
   public Airport getAirport(String code) throws NoSuchAirportException {
-    Airport airport = airportDao.getAirport(code);
+    Airport airport = airportDao.findOne(code);
     if (airport != null) {
       return airport;
     }

@@ -1,6 +1,7 @@
 package com.foo.flight.model;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -14,6 +15,7 @@ import org.pojomatic.annotations.AutoProperty;
 @AutoProperty
 @Entity
 @Table(name = "AIRPORT")
+@Embeddable 
 public class Airport {
 
   @Id

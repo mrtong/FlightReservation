@@ -49,9 +49,25 @@ public class Flight {
   @ManyToOne
   @JoinColumn(name = "FROM_AIRPORT_CODE", nullable = false)
   @XmlElement
-  private Airport from;
+  private Airport fromAirport;
 
-  @Column(name = "ARRIVAL_TIME")
+  public Airport getFromAirport() {
+	return fromAirport;
+}
+
+public void setFromAirport(Airport fromAirport) {
+	this.fromAirport = fromAirport;
+}
+
+public Airport getToAirport() {
+	return toAirport;
+}
+
+public void setToAirport(Airport toAirport) {
+	this.toAirport = toAirport;
+}
+
+@Column(name = "ARRIVAL_TIME")
   @Type(type = "com.foo.flight.model.hibernate.DateTimeUserType")
   @XmlElement
   @XmlJavaTypeAdapter(DateTimeAdapter.class)
@@ -59,7 +75,7 @@ public class Flight {
 
   @ManyToOne
   @JoinColumn(name = "TO_AIRPORT_CODE", nullable = false)
-  private Airport to;
+  private Airport toAirport;
 
 
   @Column(name = "SEATS_AVAILABLE")
@@ -94,13 +110,7 @@ public class Flight {
     this.departureTime = departureTime;
   }
 
-  public Airport getFrom() {
-    return from;
-  }
-
-  public void setFrom(Airport from) {
-    this.from = from;
-  }
+ 
 
   public int getMiles() {
     return miles;
@@ -126,14 +136,6 @@ public class Flight {
     this.seatsAvailable = seatsAvailable;
   }
 
-
-  public Airport getTo() {
-    return to;
-  }
-
-  public void setTo(Airport to) {
-    this.to = to;
-  }
 
   public void substractSeats(int count) {
     seatsAvailable -= count;

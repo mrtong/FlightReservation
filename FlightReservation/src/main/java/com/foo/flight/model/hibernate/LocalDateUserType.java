@@ -9,6 +9,7 @@ import java.sql.Types;
 
 import org.hibernate.HibernateException;
 import org.hibernate.dialect.Dialect;
+import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.type.LiteralType;
 import org.hibernate.usertype.UserType;
 import org.joda.time.LocalDate;
@@ -76,5 +77,20 @@ public class LocalDateUserType implements UserType, LiteralType {
     LocalDate localDate = (LocalDate) value;
     return localDate.toString();
   }
+
+@Override
+public Object nullSafeGet(ResultSet arg0, String[] arg1,
+		SessionImplementor arg2, Object arg3) throws HibernateException,
+		SQLException {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public void nullSafeSet(PreparedStatement arg0, Object arg1, int arg2,
+		SessionImplementor arg3) throws HibernateException, SQLException {
+	// TODO Auto-generated method stub
+	
+}
 }
 

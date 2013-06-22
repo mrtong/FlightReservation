@@ -1,4 +1,4 @@
-package com.foo.flight.dao;
+package com.foo.flight.dao.hibernate;
 
 import java.util.Date;
 
@@ -79,8 +79,8 @@ public class DefaultDaoConfig implements DaoConfig, TransactionManagementConfigu
   private Flight createFlight(String number, Airport departure, Airport arrival, int flyinghrs,
     int miles, int seatsAvail) {
     Flight f = new Flight();
-    f.setFrom(departure);
-    f.setTo(arrival);
+    f.setFromAirport(departure);
+    f.setToAirport(arrival);
 
     DateTime departureTime = new DateTime(new Date()).plusDays(1);
     DateTime arrivalTime = departureTime.plusHours(flyinghrs);

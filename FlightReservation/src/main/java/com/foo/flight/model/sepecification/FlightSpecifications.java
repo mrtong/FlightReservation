@@ -15,13 +15,9 @@ public class FlightSpecifications {
 		return new Specification<Flight>() {
 			@Override
 			public Predicate toPredicate(Root<Flight> FlightRoot,CriteriaQuery<?> query, CriteriaBuilder cb) {
-				return cb.and(cb.like(
-						cb.lower(FlightRoot.<String> get("fromAirport.code")),
-						FromAirPortCode), cb.like(
-						cb.lower(FlightRoot.<String> get("toAirport.code")),
-						ToAirPortCode));
-				// return cb.like(cb.lower(FlightRoot.<String>get("from.code")),
-				// FromAirPortCode);
+				return cb.and(cb.like(FlightRoot.<String> get("fromAirport").<String>get("code"),FromAirPortCode), 
+						cb.like(FlightRoot.<String> get("toAirport").<String>get("code"),ToAirPortCode));
+
 			}
 		};
 	}

@@ -59,7 +59,7 @@ public class FlightsController {
     mav.addObject("to", criteria.getToAirportCode());
 
     Flights searchResult = airlineService.getFlights(criteria);
-
+    System.out.println("searchFlights="+searchResult.getFlightCount());
     mav.addObject("flightSearchResult", searchResult);
 
     return mav;
@@ -70,6 +70,7 @@ public class FlightsController {
       produces={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @ResponseBody
   public Flights flightSearch(@RequestBody FlightSearchCriteria criteria) {
+	  System.out.println("flightSearch");
     return airlineService.getFlights(criteria);
   }
   
@@ -77,6 +78,7 @@ public class FlightsController {
       produces={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @ResponseBody
   public Flights getFlights() {
+	  System.out.println("getFlights");
     return new Flights(airlineService.getFlights());
   }
 

@@ -8,9 +8,9 @@
 	<display:column title="Reservation Name" property="reservationName"
 		sortable="true" />
 	<display:column title="Number of Seats" property="numberOfSeats" />
-	<display:column title="Departure City" property="flight.from.city"
+	<display:column title="Departure City" property="flight.fromAirport.city"
 		sortable="true" escapeXml="true" />
-	<display:column title="Arrival City" property="flight.to.city"
+	<display:column title="Arrival City" property="flight.toAirport.city"
 		sortable="true" escapeXml="true" />
 	<display:column title="" sortable="false">
 		<a href="${ctx}/reservations/${ticket.id}.html"> Show details </a>

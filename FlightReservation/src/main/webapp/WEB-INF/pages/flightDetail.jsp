@@ -18,9 +18,9 @@
 			From:
 		</td>
 		<td>
-			<c:out value="${flight.from.city}" />
+			<c:out value="${flight.fromAirport.city}" />
 			(
-			<c:out value="${flight.from.code}" />
+			<c:out value="${flight.fromAirport.code}" />
 			)
 		</td>
 	   <td>
@@ -37,9 +37,9 @@
             To:
         </td>
         <td>
-            <c:out value="${flight.to.city}" />
+            <c:out value="${flight.toAirport.city}" />
             (
-            <c:out value="${flight.to.code}" />
+            <c:out value="${flight.toAirport.code}" />
             )
         </td>
     

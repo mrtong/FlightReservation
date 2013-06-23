@@ -51,13 +51,13 @@
 	requestURI="" id="flight" export="true" pagesize="10">
 	<display:column title="Number" property="number" sortable="true" />
 
-	<display:column title="Departure City" property="from.city"
+	<display:column title="Departure City" property="fromAirport.city"
 		sortable="true" escapeXml="true" />
 	<display:column title="Departure" sortable="true"
 		sortProperty="departureTime" escapeXml="true">
 		<joda:format value="${flight.departureTime}" style="SS" />
 	</display:column>
-	<display:column title="Arrival City" property="to.city" sortable="true"
+	<display:column title="Arrival City" property="toAirport.city" sortable="true"
 		escapeXml="true" />
 	<display:column title="Arrival" sortable="true"
 		sortProperty="arrivalTime" escapeXml="true">

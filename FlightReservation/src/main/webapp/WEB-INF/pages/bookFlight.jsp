@@ -9,16 +9,16 @@
 	</tr>
 	<tr>
 		<td>From:</td>
-		<td><c:out value="${flight.from.city}" /> ( <c:out
-				value="${flight.from.code}" /> )</td>
+		<td><c:out value="${flight.fromAirport.city}" /> ( <c:out
+				value="${flight.fromAirport.code}" /> )</td>
 		<td>Departure:</td>
 		<td><joda:format value="${flight.departureTime}" style="MM" /></td>
 	</tr>
 
 	<tr>
 		<td>To:</td>
-		<td><c:out value="${flight.to.city}" /> ( <c:out
-				value="${flight.to.code}" /> )</td>
+		<td><c:out value="${flight.toAirport.city}" /> ( <c:out
+				value="${flight.toAirport.code}" /> )</td>
 
 		<td>Arrival:</td>
 		<td><joda:format value="${flight.arrivalTime}" style="MM" /></td>

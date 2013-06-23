@@ -16,16 +16,16 @@ Number of Seats:<c:out value="${ticket.numberOfSeats}" />
 <table class="table">
 	<tr>
 		<td>From:</td>
-		<td><c:out value="${ticket.flight.from.city}" /> ( <c:out
-				value="${ticket.flight.from.code}" /> )</td>
+		<td><c:out value="${ticket.flight.fromAirport.city}" /> ( <c:out
+				value="${ticket.flight.fromAirport.code}" /> )</td>
 		<td>Departure:</td>
 		<td><joda:format value="${ticket.flight.departureTime}" style="MM" /></td>
 	</tr>
 
 	<tr>
 		<td>To:</td>
-		<td><c:out value="${ticket.flight.to.city}" /> ( <c:out
-				value="${ticket.flight.to.code}" /> )</td>
+		<td><c:out value="${ticket.flight.toAirport.city}" /> ( <c:out
+				value="${ticket.flight.toAirport.code}" /> )</td>
 
 		<td>Arrival:</td>
 		<td><joda:format value="${ticket.flight.arrivalTime}" style="MM" /></td>

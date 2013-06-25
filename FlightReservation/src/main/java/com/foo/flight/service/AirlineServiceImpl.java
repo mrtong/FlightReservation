@@ -33,7 +33,7 @@ public class AirlineServiceImpl implements AirlineService {
 
 	@Override
 	public Flight getFlight(Long id) throws NoSuchFlightException {
-		Flight flight = flightDao.findOne(new Integer(id.toString()));
+		Flight flight = flightDao.findOne(id);
 		if (flight != null) {
 			return flight;
 		} else {

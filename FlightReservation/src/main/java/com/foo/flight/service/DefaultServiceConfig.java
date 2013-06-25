@@ -30,7 +30,7 @@ public class DefaultServiceConfig implements ServiceConfig {
   @Bean
   @Override
   public ReservationService getReservationService() {
-    return new ReservationServiceImpl(null,null);
+    return new ReservationServiceImpl();
   }
 }
 

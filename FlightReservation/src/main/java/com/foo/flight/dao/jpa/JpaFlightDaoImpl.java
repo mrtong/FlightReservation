@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import com.foo.flight.model.Flight;
 
 
-public interface JpaFlightDaoImpl extends JpaRepository<Flight, Integer>,JpaSpecificationExecutor<Flight>{
+public interface JpaFlightDaoImpl extends JpaRepository<Flight, Long>,JpaSpecificationExecutor<Flight>{
 	
 }

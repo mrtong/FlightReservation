@@ -36,7 +36,7 @@ public class JpaDefaultDaoConfig {
 
 		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL)
                 .addScript("classpath:db/initDB.sql")
-                .addScript("classpath:db/populateDB.sql")
+//                .addScript("classpath:db/populateDB.sql")
                 .build();
 	}
 

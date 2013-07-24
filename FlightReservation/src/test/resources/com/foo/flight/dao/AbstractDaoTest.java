@@ -3,13 +3,13 @@ package com.foo.flight.dao;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.foo.flight.dao.interfaces.AirportDao;
+import com.foo.flight.dao.jpa.JpaAirportDaoImpl;
 import com.foo.flight.model.Airport;
 import com.foo.flight.model.Flight;
 
 public abstract class AbstractDaoTest {
 	  @Autowired
-	  protected AirportDao airportDao;
+	  protected JpaAirportDaoImpl airportDao;
 	  protected Airport lax;
 	  protected Airport jfk;
 	  

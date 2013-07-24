@@ -32,7 +32,7 @@ public class Flight {
 
   @Id
   @Column(name = "ID")
-  @GeneratedValue(strategy = GenerationType.AUTO)
+//  @GeneratedValue(strategy = GenerationType.AUTO)
   @XmlElement(name = "flightId")
   private Long id;
 

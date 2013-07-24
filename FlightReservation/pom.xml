@@ -190,12 +190,27 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.5</version>
 		</dependency>
+		<!-- http://java.dzone.com/articles/resolving-hsqldb-exception -->
 		<dependency>
 			<groupId>hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
-			<version>1.8.0.7</version>
+			<version>1.8.0.10</version>
+			
 		</dependency>
-
+		<!-- 
+		But the below will generate Hibernate: insert into TICKET (id, FLIGHT_ID, ISSUE_DATE, numberOfSeats, reserva
+tionName) values (default, ?, ?, ?, ?)
+WARN : org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Error: -424, SQLSt
+ate: S1000
+ERROR: org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Parameter not set
+		 -->
+		 <!-- 
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.2.9</version>
+		</dependency>
+		 -->
 		<dependency>
 			<groupId>javax.transaction</groupId>
 			<artifactId>jta</artifactId>

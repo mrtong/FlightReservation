@@ -89,7 +89,9 @@ public void setToAirport(Airport toAirport) {
   public Flight(Long id) {
     this.id = id;
   }
-
+  public void setId(Long id){
+	  this.id = id;
+  }
   public Long getId() {
     return id;
   }

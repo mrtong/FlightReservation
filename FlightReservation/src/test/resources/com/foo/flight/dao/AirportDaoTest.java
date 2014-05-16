@@ -1,9 +1,6 @@
 package com.foo.flight.dao;
 
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +21,7 @@ public class AirportDaoTest extends AbstractDaoTest {
   @Test
   public void airportDaoLifeCycle() {
 
-    Airport a  = new Airport("LAX", "Los Angeles International", "LA");
+    Airport a  = new Airport("LAX", "Los Angeles International1", "LA");
     airportDao.save(a);
 //    Airport b = airportDao.getAirport("LAX");
 //    assertEquals(a, b);

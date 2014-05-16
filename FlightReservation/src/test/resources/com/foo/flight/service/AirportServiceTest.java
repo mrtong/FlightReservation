@@ -8,14 +8,13 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import com.foo.flight.dao.interfaces.AirportDao;
+import com.foo.flight.dao.jpa.JpaAirportDaoImpl;
 import com.foo.flight.model.Airport;
 import com.foo.flight.service.interfaces.AirportService;
 
@@ -24,7 +23,7 @@ import com.foo.flight.service.interfaces.AirportService;
     DefaultServiceConfig.class }, loader = AnnotationConfigContextLoader.class)
 public class AirportServiceTest {
   @Autowired
-  private AirportDao airportDaoMock;
+  private JpaAirportDaoImpl airportDaoMock;
 
   @Autowired
   private ApplicationContext ctx;
@@ -34,7 +33,7 @@ public class AirportServiceTest {
     String code = "LAX";
     Airport airport = new Airport();
 
-    Mockito.when(airportDaoMock.getAirport(code)).thenReturn(airport);
+//    Mockito.when(airportDaoMock.getAirport(code)).thenReturn(airport);
     AirportService a = ctx.getBean(AirportService.class);
     assertTrue(airport == a.getAirport(code));
   }
@@ -46,7 +45,7 @@ public class AirportServiceTest {
       Airport a = new Airport("Code:" + i, "Name:" + i, "City:" + i);
       airports.add(a);
     }
-    Mockito.when(airportDaoMock.getAirports()).thenReturn(airports);
+//    Mockito.when(airportDaoMock.getAirports()).thenReturn(airports);
     assertEquals(airports, ctx.getBean(AirportService.class).getAirports());
   }
 }

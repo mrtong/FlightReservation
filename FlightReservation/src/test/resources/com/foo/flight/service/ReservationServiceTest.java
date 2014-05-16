@@ -12,7 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import com.foo.flight.dao.interfaces.FlightDao;
+import com.foo.flight.dao.jpa.JpaFlightDaoImpl;
 import com.foo.flight.model.Reservation;
 import com.foo.flight.service.exceptions.NoSeatAvailableException;
 import com.foo.flight.service.interfaces.ReservationService;
@@ -23,7 +23,7 @@ import com.foo.flight.service.interfaces.ReservationService;
 public class ReservationServiceTest {
   
   @Autowired
-  private FlightDao flightDaoMock;
+  private JpaFlightDaoImpl flightDaoMock;
 
   @Autowired
   private ApplicationContext ctx;
@@ -37,20 +37,20 @@ public class ReservationServiceTest {
     reservation.setFlightId(flightId);
     reservation.setQuantity(5);
     
-    Mockito.when(flightDaoMock.decrementSeat(flightId, quantity)).thenReturn(true);
+//    Mockito.when(flightDaoMock.decrementSeat(flightId, quantity)).thenReturn(true);
    
     ReservationService reservationService = ctx.getBean(ReservationService.class);
 
     try {
       reservationService.bookFlight(reservation);
-      Mockito.verify(flightDaoMock, Mockito.times(1)).decrementSeat(flightId, quantity);
+//      Mockito.verify(flightDaoMock, Mockito.times(1)).decrementSeat(flightId, quantity);
     }
     catch (NoSeatAvailableException e) {
       fail("Seat booking should have happened");
     }
     
     Mockito.reset(flightDaoMock);    
-    Mockito.when(flightDaoMock.decrementSeat(flightId, quantity)).thenReturn(false);
+//    Mockito.when(flightDaoMock.decrementSeat(flightId, quantity)).thenReturn(false);
     
     try {
       reservationService.bookFlight(reservation);
@@ -58,7 +58,7 @@ public class ReservationServiceTest {
     }
     catch (NoSeatAvailableException e) {
       System.out.println(e.getMessage());
-      Mockito.verify(flightDaoMock, Mockito.times(1)).decrementSeat(flightId, quantity);
+//      Mockito.verify(flightDaoMock, Mockito.times(1)).decrementSeat(flightId, quantity);
     }    
   }
 }

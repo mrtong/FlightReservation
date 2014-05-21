@@ -1,6 +1,8 @@
 package com.foo.flight.dao;
 
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Date;
 
 import org.joda.time.DateTime;
@@ -39,7 +41,8 @@ public class FlightDaoTest extends AbstractDaoTest {
 
     flightDao.save(f);
     
-//    assertEquals(f, flightDao.getFlight(f.getId()));
+    assertEquals(f, flightDao.findOne(new Long(999)));
+    flightDao.delete(f);
 //    flightDao.decrementSeat(f.getId(), 10);
 //    assertEquals(f.getSeatsAvailable() - 10, flightDao.getFlight(f.getId()).getSeatsAvailable());
   }

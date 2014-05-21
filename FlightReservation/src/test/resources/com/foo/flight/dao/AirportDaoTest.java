@@ -1,6 +1,10 @@
 package com.foo.flight.dao;
 
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,19 +17,27 @@ import com.foo.flight.dao.jpa.JpaDefaultDaoConfig;
 import com.foo.flight.model.Airport;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { JpaDefaultDaoConfig.class }, 
-  loader = AnnotationConfigContextLoader.class)
-public class AirportDaoTest extends AbstractDaoTest {
+@ContextConfiguration(classes = { JpaDefaultDaoConfig.class }, loader = AnnotationConfigContextLoader.class)
+public class AirportDaoTest {
 	@Autowired
 	JpaAirportDaoImpl airportDao;
-  @Test
-  public void airportDaoLifeCycle() {
+	private Airport a;
+	@Before
+	public void setUp() {
+		a = new Airport("TEST", "Test Airport", "TESTER");
+    }
 
-    Airport a  = new Airport("LAX", "Los Angeles International1", "LA");
-    airportDao.save(a);
-//    Airport b = airportDao.getAirport("LAX");
-//    assertEquals(a, b);
-//    assertTrue(airportDao.getAirports().size() > 0);
-  }
+	@Test
+	public void airportDaoLifeCycle() {
+		
+		Airport a1 = airportDao.save(a);
+		assertNotNull(a1);
+		assertEquals(a, a1);
+		
+		Airport a2 = airportDao.findOne("TEST");
+		assertNotNull(a2);
+		assertEquals(a, a2);
+		
+		airportDao.delete(a);
+	}
 }
-

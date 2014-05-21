@@ -20,7 +20,8 @@ public class ControllerConfig {
   
   @Bean
   public FlightsController getFlightController() {
-    return new FlightsController(serviceConfig.getAirlineService(), serviceConfig.getAirportService());
+//    return new FlightsController(serviceConfig.getAirlineService(), serviceConfig.getAirportService());
+	  return new FlightsController();
   }
   
   @Bean

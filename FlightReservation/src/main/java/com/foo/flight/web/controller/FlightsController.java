@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -28,14 +29,11 @@ import com.foo.flight.service.interfaces.AirportService;
 
 @Controller
 public class FlightsController {
+@Autowired
+  private  AirlineService airlineService;
+@Autowired
+  private  AirportService airportService;
 
-  private final AirlineService airlineService;
-  private final AirportService airportService;
-
-  public FlightsController(AirlineService airlineService, AirportService airportService) {
-    this.airlineService = airlineService;
-    this.airportService = airportService;
-  }
 
   @RequestMapping(value = "/searchFlights.html", method = RequestMethod.GET)
   public ModelAndView searchFlights() throws Exception {

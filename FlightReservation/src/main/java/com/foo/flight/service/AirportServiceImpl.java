@@ -13,33 +13,29 @@ import com.foo.flight.service.exceptions.NoSuchAirportException;
 import com.foo.flight.service.interfaces.AirportService;
 
 @Service
-
 public class AirportServiceImpl implements AirportService {
-  @Resource
-  private JpaAirportDaoImpl airportDao;
+	@Resource
+	private JpaAirportDaoImpl airportDao;
 
+	public AirportServiceImpl() {
 
+	}
 
-public AirportServiceImpl() {
-    
-  }
+	@Override
+	@Transactional(readOnly = true)
+	public List<Airport> getAirports() {
 
-  @Override
-  @Transactional(readOnly = true)
-  public List<Airport> getAirports() {
-	
-	List<Airport> result=airportDao.findAll();
-	System.out.println("yes I can get here:airportDao="+result.size());
-    return result;
-  }
+		List<Airport> result = airportDao.findAll();
+		return result;
+	}
 
-  @Override
-  @Transactional(readOnly = true)
-  public Airport getAirport(String code) throws NoSuchAirportException {
-    Airport airport = airportDao.findOne(code);
-    if (airport != null) {
-      return airport;
-    }
-    throw new NoSuchAirportException("Airport:" + code + " not found");
-  }
+	@Override
+	@Transactional(readOnly = true)
+	public Airport getAirport(String code) throws NoSuchAirportException {
+		Airport airport = airportDao.findOne(code);
+		if (airport != null) {
+			return airport;
+		}
+		throw new NoSuchAirportException("Airport:" + code + " not found");
+	}
 }

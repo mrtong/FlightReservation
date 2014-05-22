@@ -1,8 +1,6 @@
 package com.foo.flight.dao;
 
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Date;
 
 import org.joda.time.DateTime;
@@ -18,8 +16,7 @@ import com.foo.flight.dao.jpa.JpaFlightDaoImpl;
 import com.foo.flight.model.Flight;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { JpaDefaultDaoConfig.class }, 
-  loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = { JpaDefaultDaoConfig.class }, loader = AnnotationConfigContextLoader.class)
 public class FlightDaoTest extends AbstractDaoTest {
   
   @Autowired
@@ -27,9 +24,9 @@ public class FlightDaoTest extends AbstractDaoTest {
   
   @Test
   public void flightDaoLifeCycle() {  
-    Flight f = new Flight(new Long(999));
-    f.setFromAirport(lax);
-    f.setToAirport(jfk);
+    Flight f = new Flight();
+    f.setFromAirport(syd);
+    f.setToAirport(hk);
 
     DateTime departureTime = new DateTime(new Date()).plusDays(1);
     DateTime arrivalTime = departureTime.plusHours(8);
@@ -38,13 +35,10 @@ public class FlightDaoTest extends AbstractDaoTest {
     f.setNumber("AA 123");
     f.setSeatsAvailable(300);
     f.setMiles(800);
-
-    flightDao.save(f);
+    f.setId(new Long(999));
+    Flight newFlight=flightDao.save(f);
     
-    assertEquals(f, flightDao.findOne(new Long(999)));
-    flightDao.delete(f);
-//    flightDao.decrementSeat(f.getId(), 10);
-//    assertEquals(f.getSeatsAvailable() - 10, flightDao.getFlight(f.getId()).getSeatsAvailable());
+    flightDao.delete(newFlight);
   }
 }
 

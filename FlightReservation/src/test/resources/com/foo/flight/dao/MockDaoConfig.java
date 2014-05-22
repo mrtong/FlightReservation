@@ -1,4 +1,4 @@
-package com.foo.flight.service;
+package com.foo.flight.dao;
 
 
 import org.mockito.Mockito;

@@ -10,18 +10,18 @@ import com.foo.flight.model.Flight;
 public abstract class AbstractDaoTest {
 	  @Autowired
 	  protected JpaAirportDaoImpl airportDao;
-	  protected Airport lax;
-	  protected Airport jfk;
+	  protected Airport syd;
+	  protected Airport hk;
 	  
 	  @Before
 	  public void before() {
-	    lax = new Airport("LAX", "Los Angeles International", "Los Angeles");
-	    airportDao.save(lax);
-	    jfk = new Airport("JFK", "JFK International", "New York");
-	    airportDao.save(jfk);
+		syd = new Airport("SYD", "Sydney International", "Sydney");
+	    airportDao.save(syd);
+	    hk = new Airport("HK", "Hong Kong International", "HK");
+	    airportDao.save(hk);
 	    
 	    Flight f = new Flight();
-	    f.setFromAirport(lax);
-	    f.setToAirport(jfk);
+	    f.setFromAirport(syd);
+	    f.setToAirport(hk);
 	  }
 	}

@@ -30,9 +30,8 @@ public class TicketDaoTest extends AbstractDaoTest {
 	public void ticketDaoLifeCycle() {
 
 		Flight f = new Flight();
-		f.setId(new Long(9999));
-		f.setFromAirport(lax);
-		f.setToAirport(jfk);
+		f.setFromAirport(syd);
+		f.setToAirport(hk);
 
 		DateTime departureTime = new DateTime(new Date()).plusDays(1);
 		DateTime arrivalTime = departureTime.plusHours(8);

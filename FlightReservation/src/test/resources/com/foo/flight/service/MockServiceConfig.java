@@ -1,4 +1,4 @@
-package com.foo.flight.web.controller;
+package com.foo.flight.service;
 
 
 import static org.mockito.Mockito.mock;
@@ -12,21 +12,20 @@ import com.foo.flight.service.interfaces.ReservationService;
 import com.foo.flight.service.interfaces.ServiceConfig;
 
 @Configuration
-public class MockServiceConfig implements ServiceConfig {
-  @Bean
-  @Override
+
+public class MockServiceConfig{
+
+  @Bean(name="airlineService")
   public AirlineService getAirlineService() {
-    return mock(AirlineService.class);
+    //return mock(AirlineService.class);
+	  return new AirlineServiceImpl();
   }
-  
   @Bean
-  @Override
   public ReservationService getReservationService() {
     return mock(ReservationService.class);
   }
   
   @Bean
-  @Override
   public AirportService getAirportService() {
     return mock(AirportService.class);
   }

@@ -12,6 +12,8 @@ public interface ReservationService {
 
 	  Ticket bookFlight(Reservation reservation) throws NoSuchFlightException, NoSeatAvailableException;
 
+	  Ticket bookFlight(Ticket ticket) throws NoSuchFlightException, NoSeatAvailableException;
+	  
 	  Ticket getReservation(Long reservationId) throws NoSuchReservationException;
 
 	  List<Ticket> getReservations();

@@ -26,7 +26,12 @@ import org.springframework.context.annotation.Lazy;
 @Entity
 @Table(name = "FLIGHT")
 @Lazy(value = false)
-public class Flight {
+public class Flight implements java.io.Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "ID")

@@ -16,9 +16,14 @@ import org.pojomatic.annotations.AutoProperty;
 @Entity
 @Table(name = "AIRPORT")
 @Embeddable 
-public class Airport {
+public class Airport implements java.io.Serializable{
 
-  @Id
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2458436366505918663L;
+
+@Id
   @Column(name = "CODE")
   @XmlElement
   private String code;
@@ -43,7 +48,19 @@ public class Airport {
     return city;
   }
 
-  public String getCode() {
+  public void setCode(String code) {
+	this.code = code;
+}
+
+public void setName(String name) {
+	this.name = name;
+}
+
+public void setCity(String city) {
+	this.city = city;
+}
+
+public String getCode() {
     return code;
   }
 

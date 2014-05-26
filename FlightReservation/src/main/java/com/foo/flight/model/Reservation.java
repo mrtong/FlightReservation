@@ -14,45 +14,48 @@ import org.pojomatic.annotations.AutoProperty;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @AutoProperty
-public class Reservation {
-  @XmlElement
-  @NotBlank(message = "must not be blank")
-  private String reservationName;
+public class Reservation implements java.io.Serializable {
 
-  @Min(1)
-  @XmlElement
-  private int quantity = 1;
+	private static final long serialVersionUID = -5419050485582982526L;
 
-  @XmlElement
-  @NotNull(message = "Flight Id must be provided")
-  private Long flightId;
+	@XmlElement
+	@NotBlank(message = "must not be blank")
+	private String reservationName;
 
-  public Long getFlightId() {
-    return flightId;
-  }
+	@Min(1)
+	@XmlElement
+	private int quantity = 1;
 
-  public void setFlightId(Long flightId) {
-    this.flightId = flightId;
-  }
+	@XmlElement
+	@NotNull(message = "Flight Id must be provided")
+	private Long flightId;
 
-  public int getQuantity() {
-    return quantity;
-  }
+	public Long getFlightId() {
+		return flightId;
+	}
 
-  public void setQuantity(int quantity) {
-    this.quantity = quantity;
-  }
+	public void setFlightId(Long flightId) {
+		this.flightId = flightId;
+	}
 
-  public String getReservationName() {
-    return reservationName;
-  }
+	public int getQuantity() {
+		return quantity;
+	}
 
-  public void setReservationName(String reservationName) {
-    this.reservationName = reservationName;
-  }
-  
-  @Override
-  public String toString() {
-    return Pojomatic.toString(this);
-  }
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getReservationName() {
+		return reservationName;
+	}
+
+	public void setReservationName(String reservationName) {
+		this.reservationName = reservationName;
+	}
+
+	@Override
+	public String toString() {
+		return Pojomatic.toString(this);
+	}
 }

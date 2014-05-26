@@ -32,6 +32,7 @@ public class AirlineServiceImpl implements AirlineService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Flight getFlight(Long id) throws NoSuchFlightException {
 		Flight flight = flightDao.findOne(id);
 		if (flight != null) {
@@ -46,8 +47,6 @@ public class AirlineServiceImpl implements AirlineService {
 		String fromAirportCode = criteria.getFromAirportCode();
 		String toAirportCode = criteria.getToAirportCode();
 
-//		List<Flight> flights = flightDao.findFlights(fromAirportCode,
-//				toAirportCode);
 		Specification<Flight> spec=FlightSpecifications.FromToLike(fromAirportCode, toAirportCode);
 		List<Flight> flights =flightDao.findAll(spec);
 		Flights results = new Flights();
@@ -64,5 +63,13 @@ public class AirlineServiceImpl implements AirlineService {
 			return flight;
 		}
 		throw new NoSuchFlightException("Could not find flight:" + flightNumber);
+	}
+
+	/**
+     * This setter method should be used only by unit tests.
+     */
+	public void setAirlineDao(JpaFlightDaoImpl flightDao) {
+		// TODO Auto-generated method stub
+		this.flightDao=flightDao;
 	}
 }

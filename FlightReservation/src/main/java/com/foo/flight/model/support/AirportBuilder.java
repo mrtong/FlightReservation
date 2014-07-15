@@ -1,10 +1,7 @@
 package com.foo.flight.model.support;
 
-import org.springframework.stereotype.Component;
-
 import com.foo.flight.model.Airport;
 
-@Component
 public class AirportBuilder extends EntityBuilder<Airport> {
 
 	@Override

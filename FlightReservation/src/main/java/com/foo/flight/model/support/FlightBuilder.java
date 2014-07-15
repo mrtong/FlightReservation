@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import com.foo.flight.model.Airport;
 import com.foo.flight.model.Flight;
 
-@Component
 public class FlightBuilder extends EntityBuilder<Flight>{
 
 	@Override

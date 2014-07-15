@@ -28,6 +28,7 @@ import com.foo.flight.model.Ticket;
  * Integration tests the web service calls
  */
 public class WebServiceIntegrationTest {
+	
   private RestTemplate template;
 
   private static final String BASE_URL = "http://localhost:8080/FlightReservation/";
@@ -66,7 +67,7 @@ public class WebServiceIntegrationTest {
   }
 
   private static final String FLIGHT_NUMBER = "LH 235";
-
+  
   @Test
   public void flights() {
     FlightSearchCriteria criteria = new FlightSearchCriteria();

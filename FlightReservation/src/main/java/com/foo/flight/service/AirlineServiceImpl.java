@@ -55,7 +55,24 @@ public class AirlineServiceImpl implements AirlineService {
 
 		return results;
 	}
+	@Override
+	@Transactional(readOnly = true)
+	public Flights getFlights(Specification<Flight> spec) {
 
+		List<Flight> flights =flightDao.findAll(spec);
+		Flights results = new Flights();
+		results.setFlights(flights);
+
+		return results;
+	}
+	
+	@Override
+	public Flight save(Flight flight) {
+
+		Flight flight1=flightDao.save(flight);
+		return flight1;
+	}
+	
 	@Override
 	@Transactional(readOnly = true)
 	public Flight getFlight(String flightNumber) throws NoSuchFlightException {

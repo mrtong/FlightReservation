@@ -43,6 +43,7 @@ public class AirlineServiceImpl implements AirlineService {
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public Flights getFlights(FlightSearchCriteria criteria) {
 		String fromAirportCode = criteria.getFromAirportCode();
 		String toAirportCode = criteria.getToAirportCode();
@@ -56,6 +57,7 @@ public class AirlineServiceImpl implements AirlineService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Flight getFlight(String flightNumber) throws NoSuchFlightException {
 		Specification<Flight> spec=FlightSpecifications.FlightNumberLike(flightNumber);
 		Flight flight = flightDao.findOne(spec);
@@ -72,4 +74,5 @@ public class AirlineServiceImpl implements AirlineService {
 		// TODO Auto-generated method stub
 		this.flightDao=flightDao;
 	}
+
 }

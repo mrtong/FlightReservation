@@ -3,6 +3,9 @@ package com.foo.flight.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.junit.Before;
@@ -12,14 +15,15 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.foo.flight.dao.jpa.JpaFlightDaoImpl;
-import com.foo.flight.model.Airport;
 import com.foo.flight.model.Flight;
 import com.foo.flight.model.FlightSearchCriteria;
 import com.foo.flight.model.Flights;
+import com.foo.flight.model.sepecification.FlightSpecifications;
 import com.foo.flight.model.support.FlightBuilder;
 import com.foo.flight.service.exceptions.NoSuchFlightException;
 /*
@@ -64,6 +68,27 @@ public class AirlineServiceTest {
 		}.build(true);
 
 		Mockito.when(flightDao.findOne(FLIGHT_ID)).thenReturn(flight);
+		
+		Flight flight1 = new FlightBuilder(2L){
+			{
+			fromAirport("SYD", "Sydney International", "Sydney");
+			toAirport("HK", "Hong Kong International", "HK");
+			flightBasicInfo(new DateTime(2014, 01, 13, 16, 15),new DateTime(2014, 01, 14, 19, 0),1000,13,"AV200");
+			}
+			
+		}.build(true);
+		
+		List<Flight> flightList=new ArrayList<Flight>(2);
+		flightList.add(flight);
+		flightList.add(flight1);
+		
+		String fromAirportCode = "SYD";
+		String toAirportCode = "HK";
+
+		Specification<Flight> spec=FlightSpecifications.FromToLike(fromAirportCode, toAirportCode);
+		
+		Mockito.when(flightDao.findAll(spec)).thenReturn(flightList);
+		Mockito.when(flightDao.findAll()).thenReturn(flightList);
 	}
 
 	@Test
@@ -81,20 +106,30 @@ public class AirlineServiceTest {
 
 		Long id = new Long(111);
 		assertNotNull(airlineService);
+		//To get the exception
 		Flight flight = airlineService.getFlight(id);
 
 	}
 	@Test
-	public void getFlights() {
+	public void getFlightsByCriteria() {
 		String fromAirportCode = "SYD";
 		String toAirportCode = "HK";
 		FlightSearchCriteria flightSearchCriteria = new FlightSearchCriteria();
 		flightSearchCriteria.setFromAirportCode(fromAirportCode);
 		flightSearchCriteria.setToAirportCode(toAirportCode);
-
 		Flights flights = airlineService.getFlights(flightSearchCriteria);
 
 		assertNotNull(flights);
 	}
+	
+	@Test
+	public void getFlights() {
 
+		List<Flight >flightList = airlineService.getFlights();
+
+		assertNotNull(flightList);
+		assertEquals(flightList.size(),2);
+		Flight flight=flightList.get(0);
+		assertEquals(flight.getId(),FLIGHT_ID);
+	}
 }

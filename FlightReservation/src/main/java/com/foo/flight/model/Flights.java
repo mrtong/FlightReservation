@@ -12,31 +12,31 @@ import org.pojomatic.annotations.AutoProperty;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @AutoProperty
-public class Flights {
+public class Flights implements java.io.Serializable {
 
-  private List<Flight> flights;
+	private static final long serialVersionUID = 8335864717095877786L;
+	private List<Flight> flights;
 
-  public Flights() {}
-  
-  public Flights(List<Flight> flights) {
-    this.flights = flights;
-  }
+	public Flights() {
+	}
 
-  public List<Flight> getFlights() {
-    return flights;
-  }
+	public Flights(List<Flight> flights) {
+		this.flights = flights;
+	}
 
-  public void setFlights(List<Flight> flights) {
-    this.flights = flights;
-  }
+	public List<Flight> getFlights() {
+		return flights;
+	}
 
-  public int getFlightCount() {
-    return flights != null
-        ? flights.size()
-        : 0;
-  }
+	public void setFlights(List<Flight> flights) {
+		this.flights = flights;
+	}
 
-  public String toString() {
-    return Pojomatic.toString(this);
-  }
+	public int getFlightCount() {
+		return flights != null ? flights.size() : 0;
+	}
+
+	public String toString() {
+		return Pojomatic.toString(this);
+	}
 }

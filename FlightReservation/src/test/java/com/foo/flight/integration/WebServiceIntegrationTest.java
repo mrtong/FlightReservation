@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -27,7 +28,7 @@ import com.foo.flight.model.Ticket;
 /**
  * Integration tests the web service calls
  */
-public class WebServiceIntegrationTest {
+@Ignore public class WebServiceIntegrationTest {
 	
   private RestTemplate template;
 

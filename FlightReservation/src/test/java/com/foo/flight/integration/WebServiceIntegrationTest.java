@@ -32,7 +32,8 @@ import com.foo.flight.model.Ticket;
 	
   private RestTemplate template;
 
-  private static final String BASE_URL = "http://localhost:8080/FlightReservation/";
+  //private static final String BASE_URL = "http://localhost:8080/FlightReservation/";
+  private static final String BASE_URL = "http://localhost:9091";
 
   public List<HttpMessageConverter<?>> getMessageConverters() {
     List<HttpMessageConverter<?>> converters = new ArrayList<HttpMessageConverter<?>>();

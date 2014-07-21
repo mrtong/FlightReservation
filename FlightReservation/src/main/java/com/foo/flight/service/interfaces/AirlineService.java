@@ -2,6 +2,7 @@ package com.foo.flight.service.interfaces;
 
 import java.util.List;
 
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 import com.foo.flight.dao.jpa.JpaFlightDaoImpl;
@@ -19,5 +20,9 @@ public interface AirlineService {
 	  List<Flight> getFlights();
 	  
 	  Flights getFlights(FlightSearchCriteria criteria);
+	  
+	  Flights getFlights(Specification<Flight> spec);
+	  
+	  Flight save(Flight flight);
 	  
 	}

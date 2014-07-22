@@ -1,5 +1,6 @@
 package com.foo.flight.service;
 
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -9,6 +10,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -55,16 +57,17 @@ public class AirlineServiceTest {
 	private JpaFlightDaoImpl flightDao;
 	@Autowired
 	AirlineServiceImpl airlineService;
-
+	
+	
 	@Before
 	public void setup() {
+
 		Flight flight = new FlightBuilder(FLIGHT_ID){
 			{
 			fromAirport("SYD", "Sydney International", "Sydney");
 			toAirport("HK", "Hong Kong International", "HK");
 			flightBasicInfo(new DateTime(2013, 10, 3, 19, 0),new DateTime(2013, 10, 4, 9, 0),1000,3,"AV100");
 			}
-			
 		}.build(true);
 
 		Mockito.when(flightDao.findOne(FLIGHT_ID)).thenReturn(flight);
@@ -75,7 +78,6 @@ public class AirlineServiceTest {
 			toAirport("HK", "Hong Kong International", "HK");
 			flightBasicInfo(new DateTime(2014, 01, 13, 16, 15),new DateTime(2014, 01, 14, 19, 0),1000,13,"AV200");
 			}
-			
 		}.build(true);
 		
 		List<Flight> flightList=new ArrayList<Flight>(2);
@@ -89,25 +91,24 @@ public class AirlineServiceTest {
 		
 		Mockito.when(flightDao.findAll(spec)).thenReturn(flightList);
 		Mockito.when(flightDao.findAll()).thenReturn(flightList);
+		Mockito.when(flightDao.save(flight)).thenReturn(flight);
 	}
 
 	@Test
 	public void getFlightById() throws NoSuchFlightException {
-
 		assertNotNull(airlineService);
 		Flight flight = airlineService.getFlight(FLIGHT_ID);
-		log.debug(flight);
+		log.info(flight);
 		assertNotNull(flight);
 		assertEquals(flight.getId(), FLIGHT_ID);
 	}
 	
 	@Test(expected=NoSuchFlightException.class)
 	public void getFlightByIdNotFound() throws NoSuchFlightException {
-
 		Long id = new Long(111);
 		assertNotNull(airlineService);
 		//To get the exception
-		Flight flight = airlineService.getFlight(id);
+		airlineService.getFlight(id);
 
 	}
 	@Test
@@ -124,12 +125,32 @@ public class AirlineServiceTest {
 	
 	@Test
 	public void getFlights() {
-
 		List<Flight >flightList = airlineService.getFlights();
 
 		assertNotNull(flightList);
 		assertEquals(flightList.size(),2);
 		Flight flight=flightList.get(0);
 		assertEquals(flight.getId(),FLIGHT_ID);
+	}
+	
+	@Test
+	@Ignore public void getFlightsByFlightNumber() {
+		
+	}
+	
+	@Test
+	public void save(){
+		Flight flight = new FlightBuilder(FLIGHT_ID){
+			{
+			fromAirport("SYD", "Sydney International", "Sydney");
+			toAirport("HK", "Hong Kong International", "HK");
+			flightBasicInfo(new DateTime(2013, 10, 3, 19, 0),new DateTime(2013, 10, 4, 9, 0),1000,3,"AV100");
+			}
+		}.build(true);
+
+		Flight flight2=airlineService.save(flight);
+		
+		assertNotNull(flight2);
+		assertEquals(flight2.getId(), FLIGHT_ID);
 	}
 }

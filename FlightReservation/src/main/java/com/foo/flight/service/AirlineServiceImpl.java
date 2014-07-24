@@ -49,13 +49,22 @@ public class AirlineServiceImpl implements AirlineService {
 		String toAirportCode = criteria.getToAirportCode();
 
 		Specification<Flight> spec=FlightSpecifications.FromToLike(fromAirportCode, toAirportCode);
-		List<Flight> flights =flightDao.findAll(spec);
+		List<Flight> flightList =flightDao.findAll(spec);
 		Flights results = new Flights();
-		results.setFlights(flights);
+		results.setFlights(flightList);
 
 		return results;
 	}
-	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Flight> getFlightListByCriteria(FlightSearchCriteria criteria){
+		String fromAirportCode = criteria.getFromAirportCode();
+		String toAirportCode = criteria.getToAirportCode();
+
+		Specification<Flight> spec=FlightSpecifications.FromToLike(fromAirportCode, toAirportCode);
+		List<Flight> flightList =flightDao.findAll(spec);
+		return flightList;
+	}
 	@Override
 	@Transactional(readOnly = true)
 	public Flights getFlights(Specification<Flight> spec) {

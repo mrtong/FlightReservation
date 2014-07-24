@@ -60,7 +60,7 @@ public class AirlineServiceTest {
 	
 	
 	@Before
-	public void setup() {
+	public void setup() throws Exception{
 
 		Flight flight = new FlightBuilder(FLIGHT_ID){
 			{
@@ -71,7 +71,7 @@ public class AirlineServiceTest {
 		}.build(true);
 
 		Mockito.when(flightDao.findOne(FLIGHT_ID)).thenReturn(flight);
-		
+//		Mockito.when(airlineService.getFlight(FLIGHT_ID)).thenReturn(flight);
 		Flight flight1 = new FlightBuilder(2L){
 			{
 			fromAirport("SYD", "Sydney International", "Sydney");
@@ -84,14 +84,16 @@ public class AirlineServiceTest {
 		flightList.add(flight);
 		flightList.add(flight1);
 		
-		String fromAirportCode = "SYD";
-		String toAirportCode = "HK";
-
-		Specification<Flight> spec=FlightSpecifications.FromToLike(fromAirportCode, toAirportCode);
-		
-		Mockito.when(flightDao.findAll(spec)).thenReturn(flightList);
 		Mockito.when(flightDao.findAll()).thenReturn(flightList);
 		Mockito.when(flightDao.save(flight)).thenReturn(flight);
+		//==============
+		String fromAirportCode = "SYD";
+		String toAirportCode = "HK";
+		FlightSearchCriteria flightSearchCriteria = new FlightSearchCriteria();
+		flightSearchCriteria.setFromAirportCode(fromAirportCode);
+		flightSearchCriteria.setToAirportCode(toAirportCode);
+		
+		Mockito.when(airlineService.getFlightListByCriteria(flightSearchCriteria)).thenReturn(flightList);
 	}
 
 	@Test
@@ -118,9 +120,11 @@ public class AirlineServiceTest {
 		FlightSearchCriteria flightSearchCriteria = new FlightSearchCriteria();
 		flightSearchCriteria.setFromAirportCode(fromAirportCode);
 		flightSearchCriteria.setToAirportCode(toAirportCode);
-		Flights flights = airlineService.getFlights(flightSearchCriteria);
+		
+		List<Flight> flightList=new ArrayList<Flight>(2);
+		flightList= airlineService.getFlightListByCriteria(flightSearchCriteria);
 
-		assertNotNull(flights);
+		assertNotNull(flightList);
 	}
 	
 	@Test

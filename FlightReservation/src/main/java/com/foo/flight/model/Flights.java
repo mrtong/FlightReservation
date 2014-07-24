@@ -9,9 +9,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.pojomatic.Pojomatic;
 import org.pojomatic.annotations.AutoProperty;
 
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
-@AutoProperty
 public class Flights implements java.io.Serializable {
 
 	private static final long serialVersionUID = 8335864717095877786L;

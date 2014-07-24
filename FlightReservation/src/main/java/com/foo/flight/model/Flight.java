@@ -51,7 +51,7 @@ public class Flight implements java.io.Serializable{
 
 	@ManyToOne
 	@JoinColumn(name = "FROM_AIRPORT_CODE", nullable = false)
-	@XmlElement
+	@XmlElement(name = "fromAirport")
 	private Airport fromAirport;
 
 	public Airport getFromAirport() {
@@ -78,6 +78,7 @@ public class Flight implements java.io.Serializable{
 
 	@ManyToOne
 	@JoinColumn(name = "TO_AIRPORT_CODE", nullable = false)
+	@XmlElement(name = "toAirport")
 	private Airport toAirport;
 
 	@Column(name = "SEATS_AVAILABLE")

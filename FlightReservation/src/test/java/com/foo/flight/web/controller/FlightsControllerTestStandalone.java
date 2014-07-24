@@ -2,14 +2,18 @@ package com.foo.flight.web.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -22,6 +26,7 @@ import com.foo.flight.dao.jpa.JpaFlightDaoImpl;
 import com.foo.flight.model.Flight;
 import com.foo.flight.model.FlightSearchCriteria;
 import com.foo.flight.model.Flights;
+import com.foo.flight.model.support.FlightBuilder;
 import com.foo.flight.service.AirlineServiceImpl;
 import com.foo.flight.service.interfaces.AirportService;
 /*
@@ -51,6 +56,28 @@ public class FlightsControllerTestStandalone {
 		ReflectionTestUtils.setField(flightsController, "airlineService", airlineService);
 		ReflectionTestUtils.setField(flightsController, "airportService", airportService);
 		mockMvc = MockMvcBuilders.standaloneSetup(flightsController).build();
+		//=========
+		Flight flight = new FlightBuilder(1L){
+			{
+			fromAirport("SYD", "Sydney International", "Sydney");
+			toAirport("HK", "Hong Kong International", "HK");
+			flightBasicInfo(new DateTime(2013, 10, 3, 19, 0),new DateTime(2013, 10, 4, 9, 0),1000,3,"AV100");
+			}
+		}.build(true);
+
+		Flight flight1 = new FlightBuilder(2L){
+			{
+			fromAirport("SYD", "Sydney International", "Sydney");
+			toAirport("HK", "Hong Kong International", "HK");
+			flightBasicInfo(new DateTime(2014, 01, 13, 16, 15),new DateTime(2014, 01, 14, 19, 0),1000,13,"AV200");
+			}
+		}.build(true);
+		
+		List<Flight> flightList=new ArrayList<Flight>(2);
+		flightList.add(flight);
+		flightList.add(flight1);
+		Mockito.when(airlineService.getFlights()).thenReturn(flightList);
+		
 	}
 	
 	
@@ -61,7 +88,7 @@ public class FlightsControllerTestStandalone {
 		criteria.setFromAirportCode("SYD");
 		criteria.setToAirportCode("HK");
 
-		Flights results = new Flights();
+		
 		List<Flight> flights = new ArrayList<Flight>();
 		mockMvc.perform(post("/searchFlights.html")).andExpect(status().isOk());
 		
@@ -72,15 +99,13 @@ public class FlightsControllerTestStandalone {
 	}
 	@Test
 	public void test_getFlights() throws Exception {
-		MockHttpServletRequestBuilder getRequest = get("/flights").accept(MediaType.ALL);
-		ResultActions results = mockMvc.perform(getRequest);
-		results.andExpect(status().isOk());
-//===========================================================
-		//mockMvc.perform(get("/flights").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+		final String mediaType = "application/json";
+		MockHttpServletRequestBuilder getRequest = get("/flights").accept(MediaType.APPLICATION_JSON);
+		ResultActions resultActions = mockMvc.perform(getRequest);
+		resultActions.andDo(print());
+		resultActions.andExpect(content().contentType(mediaType));
+		resultActions.andExpect(status().isOk());
 		
-//		Mockito.when(airlineService.getFlights(criteria)).thenReturn(results);
-		//System.out.println("aaaaa="+flightsController.getFlights());
-//		assertTrue(results == flightsController.flightSearch(criteria));
-//		Mockito.verify(airlineService, Mockito.times(1)).getFlights(criteria);
+
 	}
 }

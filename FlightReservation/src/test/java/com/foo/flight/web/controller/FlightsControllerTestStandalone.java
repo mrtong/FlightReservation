@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.MediaType;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -25,7 +26,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.foo.flight.dao.jpa.JpaFlightDaoImpl;
 import com.foo.flight.model.Flight;
 import com.foo.flight.model.FlightSearchCriteria;
-import com.foo.flight.model.Flights;
+import com.foo.flight.model.sepecification.FlightSpecifications;
 import com.foo.flight.model.support.FlightBuilder;
 import com.foo.flight.service.AirlineServiceImpl;
 import com.foo.flight.service.interfaces.AirportService;
@@ -95,7 +96,9 @@ public class FlightsControllerTestStandalone {
 //		Mockito.when(airlineService.getFlights(criteria)).thenReturn(results);
 		//System.out.println("aaaaa="+flightsController.flightSearch(criteria));
 //		assertTrue(results == flightsController.flightSearch(criteria));
-//		Mockito.verify(airlineService, Mockito.times(1)).getFlights(criteria);
+		Specification<Flight> spec=FlightSpecifications.FromToLike("SYD", "HK");
+
+		Mockito.verify(airlineService).getFlights(spec);
 	}
 	@Test
 	public void test_getFlights() throws Exception {
@@ -105,7 +108,7 @@ public class FlightsControllerTestStandalone {
 		resultActions.andDo(print());
 		resultActions.andExpect(content().contentType(mediaType));
 		resultActions.andExpect(status().isOk());
-		
+		Mockito.verify(airlineService).getFlights();
 
 	}
 }

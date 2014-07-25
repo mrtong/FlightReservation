@@ -19,8 +19,6 @@ public interface AirlineService {
 
 	  List<Flight> getFlights();
 	  
-	  List<Flight> getFlightListByCriteria(FlightSearchCriteria criteria);
-	  
 	  Flights getFlights(FlightSearchCriteria criteria);
 	  
 	  Flights getFlights(Specification<Flight> spec);

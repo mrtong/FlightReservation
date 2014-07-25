@@ -86,14 +86,6 @@ public class AirlineServiceTest {
 		
 		Mockito.when(flightDao.findAll()).thenReturn(flightList);
 		Mockito.when(flightDao.save(flight)).thenReturn(flight);
-		//==============
-		String fromAirportCode = "SYD";
-		String toAirportCode = "HK";
-		FlightSearchCriteria flightSearchCriteria = new FlightSearchCriteria();
-		flightSearchCriteria.setFromAirportCode(fromAirportCode);
-		flightSearchCriteria.setToAirportCode(toAirportCode);
-		
-		Mockito.when(airlineService.getFlightListByCriteria(flightSearchCriteria)).thenReturn(flightList);
 	}
 
 	@Test
@@ -113,19 +105,19 @@ public class AirlineServiceTest {
 		airlineService.getFlight(id);
 
 	}
-	@Test
-	public void getFlightsByCriteria() {
-		String fromAirportCode = "SYD";
-		String toAirportCode = "HK";
-		FlightSearchCriteria flightSearchCriteria = new FlightSearchCriteria();
-		flightSearchCriteria.setFromAirportCode(fromAirportCode);
-		flightSearchCriteria.setToAirportCode(toAirportCode);
-		
-		List<Flight> flightList=new ArrayList<Flight>(2);
-		flightList= airlineService.getFlightListByCriteria(flightSearchCriteria);
-
-		assertNotNull(flightList);
-	}
+//	@Test
+//	public void getFlightsByCriteria() {
+//		String fromAirportCode = "SYD";
+//		String toAirportCode = "HK";
+//		FlightSearchCriteria flightSearchCriteria = new FlightSearchCriteria();
+//		flightSearchCriteria.setFromAirportCode(fromAirportCode);
+//		flightSearchCriteria.setToAirportCode(toAirportCode);
+//		
+//		List<Flight> flightList=new ArrayList<Flight>(2);
+//		flightList= airlineService.getFlightListByCriteria(flightSearchCriteria);
+//
+//		assertNotNull(flightList);
+//	}
 	
 	@Test
 	public void getFlights() {

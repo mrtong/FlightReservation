@@ -7,7 +7,7 @@
 	<artifactId>FlightReservation</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>Spring Example</name>
+	<name>Flight Reservation</name>
 
 	<description>
 		Spring MVC Java Config Example that demonstrates Spring MVC, Transactions and

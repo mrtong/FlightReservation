@@ -55,16 +55,7 @@ public class AirlineServiceImpl implements AirlineService {
 
 		return results;
 	}
-	@Override
-	@Transactional(readOnly = true)
-	public List<Flight> getFlightListByCriteria(FlightSearchCriteria criteria){
-		String fromAirportCode = criteria.getFromAirportCode();
-		String toAirportCode = criteria.getToAirportCode();
 
-		Specification<Flight> spec=FlightSpecifications.FromToLike(fromAirportCode, toAirportCode);
-		List<Flight> flightList =flightDao.findAll(spec);
-		return flightList;
-	}
 	@Override
 	@Transactional(readOnly = true)
 	public Flights getFlights(Specification<Flight> spec) {

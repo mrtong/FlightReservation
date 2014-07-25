@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.foo.flight.model.Flight;
-import com.foo.flight.service.AirlineServiceTest;
 
 public class FlightSpecifications {
 	public static Logger log = Logger.getLogger(FlightSpecifications.class);

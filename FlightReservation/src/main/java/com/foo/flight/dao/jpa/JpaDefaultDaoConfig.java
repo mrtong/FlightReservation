@@ -56,7 +56,7 @@ public class JpaDefaultDaoConfig {
 	private Properties hibProperties() {
 		Properties properties = new Properties();
 		properties.put(PROPERTY_NAME_HIBERNATE_DIALECT,	"org.hibernate.dialect.MySQL5InnoDBDialect");
-		properties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, "true");
+		properties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, "false");
 		return properties;
 	}
 

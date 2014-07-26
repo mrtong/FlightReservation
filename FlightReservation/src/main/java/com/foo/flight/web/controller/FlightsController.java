@@ -24,7 +24,7 @@ import com.foo.flight.model.Airport;
 import com.foo.flight.model.Flight;
 import com.foo.flight.model.FlightSearchCriteria;
 import com.foo.flight.model.Flights;
-import com.foo.flight.model.sepecification.FlightSpecifications;
+import com.foo.flight.model.sepecification.FlightFromToLikeSpecification;
 import com.foo.flight.service.exceptions.NoSuchFlightException;
 import com.foo.flight.service.interfaces.AirlineService;
 import com.foo.flight.service.interfaces.AirportService;
@@ -48,26 +48,6 @@ public class FlightsController {
 
 		return mav;
 	}
-
-//	@RequestMapping(value = "/searchFlights.html", method = RequestMethod.POST)
-//	public ModelAndView searchFlights(FlightSearchCriteria criteria)
-//			throws Exception {
-//		log.info("searchFlights by criteria searchFlights.html");
-//		ModelAndView mav = new ModelAndView("searchFlights");
-//
-//		mav.addObject("airports", airportService.getAirports());
-//
-//		mav.addObject("from", criteria.getFromAirportCode());
-//		mav.addObject("to", criteria.getToAirportCode());
-//		
-//		Flights searchResult = airlineService.getFlights(criteria);
-//		if (searchResult != null) {
-//			log.info(searchResult.getFlightCount());
-//		}
-//		mav.addObject("flightSearchResult", searchResult);
-//
-//		return mav;
-//	}
 	
 	@RequestMapping(value = "/searchFlights.html", method = RequestMethod.POST)
 	public ModelAndView searchFlights(FlightSearchCriteria criteria)
@@ -82,11 +62,11 @@ public class FlightsController {
 		mav.addObject("from", _fromAirport);
 		mav.addObject("to", _toAirport);
 		
-		Specification<Flight> spec=FlightSpecifications.FromToLike(_fromAirport, _toAirport);
+		Specification<Flight> spec=FlightFromToLikeSpecification.FromToLike(_fromAirport, _toAirport);
 		log.info("searchFlights by spec searchFlights.html");
 		Flights searchResult = airlineService.getFlights(spec);
 		if (searchResult != null) {
-			log.info(searchResult.getFlightCount());
+			log.info("/searchFlights.html there are "+searchResult.getFlightCount()+" Flights totally");
 		}
 		mav.addObject("flightSearchResult", searchResult);
 
@@ -105,7 +85,7 @@ public class FlightsController {
 			MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public Flights getFlights() {
-		System.out.println("getFlights");
+		log.info("URL:/flights:::method name:getFlights");
 		return new Flights(airlineService.getFlights());
 	}
 

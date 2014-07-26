@@ -12,7 +12,8 @@ import com.foo.flight.dao.jpa.JpaFlightDaoImpl;
 import com.foo.flight.model.Flight;
 import com.foo.flight.model.FlightSearchCriteria;
 import com.foo.flight.model.Flights;
-import com.foo.flight.model.sepecification.FlightSpecifications;
+import com.foo.flight.model.sepecification.FlightFromToLikeSpecification;
+import com.foo.flight.model.sepecification.FlightNumberLikeSpecification;
 import com.foo.flight.service.exceptions.NoSuchFlightException;
 import com.foo.flight.service.interfaces.AirlineService;
 
@@ -48,7 +49,7 @@ public class AirlineServiceImpl implements AirlineService {
 		String fromAirportCode = criteria.getFromAirportCode();
 		String toAirportCode = criteria.getToAirportCode();
 
-		Specification<Flight> spec=FlightSpecifications.FromToLike(fromAirportCode, toAirportCode);
+		Specification<Flight> spec=FlightFromToLikeSpecification.FromToLike(fromAirportCode, toAirportCode);
 		List<Flight> flightList =flightDao.findAll(spec);
 		Flights results = new Flights();
 		results.setFlights(flightList);
@@ -77,7 +78,7 @@ public class AirlineServiceImpl implements AirlineService {
 	@Override
 	@Transactional(readOnly = true)
 	public Flight getFlight(String flightNumber) throws NoSuchFlightException {
-		Specification<Flight> spec=FlightSpecifications.FlightNumberLike(flightNumber);
+		Specification<Flight> spec=FlightNumberLikeSpecification.FlightNumberLike(flightNumber);
 		Flight flight = flightDao.findOne(spec);
 		if (flight != null) {
 			return flight;

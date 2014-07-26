@@ -17,15 +17,11 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.foo.flight.dao.jpa.JpaFlightDaoImpl;
 import com.foo.flight.model.Flight;
-import com.foo.flight.model.FlightSearchCriteria;
-import com.foo.flight.model.Flights;
-import com.foo.flight.model.sepecification.FlightSpecifications;
 import com.foo.flight.model.support.FlightBuilder;
 import com.foo.flight.service.exceptions.NoSuchFlightException;
 /*

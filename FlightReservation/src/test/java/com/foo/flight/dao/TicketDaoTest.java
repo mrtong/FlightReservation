@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import com.foo.flight.model.Ticket;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { JpaDefaultDaoConfig.class }, loader = AnnotationConfigContextLoader.class)
-public class TicketDaoTest extends AbstractDaoTest {
+@Ignore public class TicketDaoTest extends AbstractDaoTest {
 
 	@Autowired
 	private JpaTicketDaoImpl ticketDao;

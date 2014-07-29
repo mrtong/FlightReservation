@@ -4,6 +4,7 @@ package com.foo.flight.dao;
 import java.util.Date;
 
 import org.joda.time.DateTime;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import com.foo.flight.model.Flight;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { JpaDefaultDaoConfig.class }, loader = AnnotationConfigContextLoader.class)
-public class FlightDaoTest extends AbstractDaoTest {
+@Ignore public class FlightDaoTest extends AbstractDaoTest {
   
   @Autowired
   private JpaFlightDaoImpl flightDao;

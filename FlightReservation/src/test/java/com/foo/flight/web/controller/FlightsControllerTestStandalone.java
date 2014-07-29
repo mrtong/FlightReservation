@@ -6,10 +6,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -27,7 +23,6 @@ import com.foo.flight.dao.jpa.JpaFlightDaoImpl;
 import com.foo.flight.model.Flight;
 import com.foo.flight.model.FlightSearchCriteria;
 import com.foo.flight.model.sepecification.FlightFromToLikeSpecification;
-import com.foo.flight.model.support.FlightBuilder;
 import com.foo.flight.service.AirlineServiceImpl;
 import com.foo.flight.service.interfaces.AirportService;
 /*
@@ -83,7 +78,7 @@ public class FlightsControllerTestStandalone {
 		  Apparently the problem is although they are both use the same object FlightFromToLikeSpecification, they are using differnt FlightSpecifications instances.
 		  Then the solution is easy, in the FlightFromToLikeSpecification FromToLike method make it singleton.
 		 */
-		Mockito.verify(airlineService).getFlights(spec);
+		Mockito.verify(airlineService,Mockito.times(1)).getFlights(spec);
 	}
 	@Test
 	public void test_getFlights() throws Exception {

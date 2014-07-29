@@ -10,6 +10,7 @@ import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -37,7 +38,7 @@ public class NewAirlineServiceTest {
 	@Before
 	public void setup() throws Exception{
 		MockitoAnnotations.initMocks( this );
-		airlineService=new AirlineServiceImpl();
+		airlineService=Mockito.spy(new AirlineServiceImpl());
 		ReflectionTestUtils.setField(airlineService, "flightDao", flightDao);
 	}
 
@@ -45,7 +46,7 @@ public class NewAirlineServiceTest {
 	public void getFlightById() throws NoSuchFlightException {
 		assertNotNull(airlineService);
 		airlineService.getFlight(FLIGHT_ID);
-		verify(flightDao).findOne(FLIGHT_ID);
+		verify(flightDao, Mockito.times(1)).findOne(FLIGHT_ID);
 	}
 	
 	@Test
@@ -56,7 +57,7 @@ public class NewAirlineServiceTest {
 		Specification<Flight> spec=FlightFromToLikeSpecification.FromToLike(fromAirportCode, toAirportCode);
 		airlineService.getFlights(spec);
 		
-		verify(flightDao).findAll(spec);
+		verify(flightDao, Mockito.times(1)).findAll(spec);
 	}
 	
 	@Test
@@ -64,7 +65,7 @@ public class NewAirlineServiceTest {
 		List<Flight >flightList = airlineService.getFlights();
 
 		assertNotNull(flightList);
-		verify(flightDao).findAll();
+		verify(flightDao, Mockito.times(1)).findAll();
 	}
 	
 	@Test(expected=NoSuchFlightException.class)
@@ -72,7 +73,8 @@ public class NewAirlineServiceTest {
 		Specification<Flight> spec=FlightNumberLikeSpecification.FlightNumberLike("SYD");
 		airlineService.getFlight("SYD");
 		
-		verify(flightDao).findOne(spec);
+		verify(flightDao, Mockito.times(1)).findOne(spec);
+		verify(flightDao, Mockito.never()).findAll();
 	}
 	
 	@Test
@@ -86,7 +88,7 @@ public class NewAirlineServiceTest {
 		}.build(true);
 
 		airlineService.save(flight);
-		verify(flightDao).save(flight);
+		verify(flightDao, Mockito.times(1)).save(flight);
 
 	}
 }

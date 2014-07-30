@@ -2,18 +2,16 @@ package com.foo.flight.model;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.pojomatic.Pojomatic;
 import org.pojomatic.annotations.AutoProperty;
-
+@JsonIgnoreProperties(value = { "flightCount" })
+@AutoProperty
 public class Flights implements java.io.Serializable {
 
 	private static final long serialVersionUID = 8335864717095877786L;
 	private List<Flight> flights;
-
+	private int flightCount;
 	public Flights() {
 	}
 
@@ -28,9 +26,10 @@ public class Flights implements java.io.Serializable {
 	public void setFlights(List<Flight> flights) {
 		this.flights = flights;
 	}
-
+	
 	public int getFlightCount() {
-		return flights != null ? flights.size() : 0;
+		flightCount=flights != null ? flights.size() : 0;
+		return flightCount;
 	}
 
 	public String toString() {
